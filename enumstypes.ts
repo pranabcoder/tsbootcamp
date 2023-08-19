@@ -1,12 +1,27 @@
 // -------------- TYPES -------------- //
-var Roles;
-(function (Roles) {
-    Roles["ADMIN"] = "ADMIN";
-    Roles["READ_ONLY"] = "READ_ONLY";
-    Roles["AUTHOR"] = "AUTHOR";
-})(Roles || (Roles = {}));
+
+type ProductDetails = {
+    title: string;
+    description: string;
+};
+
+enum Roles {
+    ADMIN = 'ADMIN',
+    READ_ONLY = 'READ_ONLY',
+    AUTHOR = 'AUTHOR'
+}
+
+type Product = {
+    id: string;
+    price: number;
+    tags: string[];
+    details: ProductDetails;
+    role: Roles;
+};
+
 // -------------- DATA -------------- //
-var product = {
+
+const product: Product = {
     id: 'abc1',
     price: 12.99,
     tags: ['great-offer', 'hot-and-new'],
@@ -16,10 +31,13 @@ var product = {
     },
     role: Roles.AUTHOR
 };
+
 // -------------- LOGGING -------------- //
-function logRole(product) {
+
+function logRole(product: Product): void {
     if (product.role === Roles.AUTHOR) {
         console.log('is author');
     }
 }
+
 logRole(product);

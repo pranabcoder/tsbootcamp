@@ -5,15 +5,21 @@ type ProductDetails = {
     description: string;
 };
 
+enum Roles {
+    ADMIN = 'ADMIN',
+    READ_ONLY = 100,
+    AUTHOR = 'AUTHOR'
+}
+
 type Product = {
     id: string;
     price: number;
     tags: string[];
     details: ProductDetails;
-    role: (string | number)[];
+    role: Roles;
 };
 
-// -------------- DATA DEFINITION -------------- //
+// -------------- DATA -------------- //
 
 const product: Product = {
     id: 'abc1',
@@ -23,24 +29,15 @@ const product: Product = {
         title: 'Red Carpet',
         description: 'A great carpet - almost brand-new!'
     },
-    role: [2, 'author']
+    role: Roles.AUTHOR
 };
 
-// -------------- DATA MANIPULATION -------------- //
+// -------------- LOGGING -------------- //
 
-product.role.push('admin');
-product.role[3] = 20;
-
-// -------------- LOGGING FUNCTIONS -------------- //
-
-// console.log(product.details.title);
-
-// product.tags.forEach(tag => console.log(tag.toUpperCase()));
-
-product.role.forEach(role => {
-    if (typeof role === "string") {
-        console.log(role.toUpperCase());
-    } else {
-        console.log(role);
+function logRole(product: Product): void {
+    if (product.role === Roles.AUTHOR) {
+        console.log('is author');
     }
-});
+}
+
+logRole(product);
